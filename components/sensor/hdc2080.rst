@@ -1,0 +1,85 @@
+HDC2080 Temperature+Humidity Sensor
+===================================
+
+.. seo::
+    :description: Instructions for setting up HDC2080 temperature and humidity sensors.
+    :image: hdc2080.jpg
+    :keywords: HDC2080
+
+The HDC2080 Temperature+Humidity sensor allows you to use your HDC2080
+(`datasheet <https://www.ti.com/lit/ds/symlink/hdc2080.pdf>`) sensors with
+ESPHome. The :ref:`I²C Bus <i2c>` is
+required to be set up in your configuration for this sensor to work.
+
+.. figure:: images/HDC2080-full.jpg
+    :align: center
+    :target: `Texas`_
+    :width: 50.0%
+
+    HDC2080 Temperature & Humidity Sensor. Image by `Texas Instruments`_.
+
+.. Texas: https://www.ti.com/tool/HDC2080EVM
+
+.. figure:: images/temperature-humidity.png
+    :align: center
+    :width: 80.0%
+
+.. code-block:: yaml
+
+    # Example configuration entry
+    sensor:
+      - platform: HDC2080
+        temperature:
+          name: "Living Room Temperature"
+        humidity:
+          name: "Living Room Humidity"
+        update_interval: 60s
+
+Configuration variables:
+------------------------
+
+- **temperature** (**Required**): The information for the temperature sensor.
+
+  - All options from :ref:`Sensor <config-sensor>`.
+
+- **humidity** (**Required**): The information for the humidity sensor
+
+  - All options from :ref:`Sensor <config-sensor>`.
+
+- **update_interval** (*Optional*, :ref:`config-time`): The interval to check the sensor. Defaults to ``60s``.
+
+
+Currently, the platform doesn't support activating the built-in heater or the data ready pin,
+as it seems to only be rarely of use. If you need it, please open an
+issue.
+
+Notes
+--------
+
+This library also appears to the compatible with the  `DFRobot CHT8305 I2C Temperature and Humidity Sensor <https://wiki.dfrobot.com/SKU_SEN0546_I2C_Temperature_and_Humidity_Sensor_Stainless_Steel_Shell>`__) on address 0x40.
+
+.. code-block:: yaml
+
+    # Example configuration entry
+    sensor:
+      - platform: HDC2080
+        temperature:
+          name: "Outside Temperature"
+        humidity:
+          name: "Outside Humidity"
+        address: 0x40
+        update_interval: 60s
+
+
+See Also
+--------
+
+- :ref:`sensor-filters`
+- :doc:`absolute_humidity`
+- :doc:`hdc1080`
+- :doc:`dht`
+- :doc:`dht12`
+- :doc:`htu21d`
+- :doc:`sht3xd`
+- :apiref:`HDC2080/HDC2080.h`
+- :ghedit:`Edit`
